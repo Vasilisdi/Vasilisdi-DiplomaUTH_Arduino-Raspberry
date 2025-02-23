@@ -1,0 +1,16 @@
+serial:
+  # This applies in the case of Linux OS
+  port_linux: "/dev/ttyACM0"
+  # This applies in the case of Windows OS
+  port_windows: "COM3"
+  baud_rate: 115200
+time_window: 30
+#user defined
+rpm: 300
+bpfi: 3.4
+bpfo: 2
+ftf: 10
+bsf: 5
+threshold: 5
+api:
+  url: "https://vibration-monitoring.azurewebsites.net/v1/measurements"

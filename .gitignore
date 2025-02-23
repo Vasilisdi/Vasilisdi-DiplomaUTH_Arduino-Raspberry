@@ -1,0 +1,12 @@
+# Ignore virtual environment folders
+.venv/
+venv/
+
+# Ignore environment variable files (except .env.sample)
+.env
+
+# Ignore archived files
+Archive/
+
+# Ignore the file that contains the configuration file for the raspberry that is on Raspbian lite - to be used so as to connect to your router
+wpa_supplicant.conf

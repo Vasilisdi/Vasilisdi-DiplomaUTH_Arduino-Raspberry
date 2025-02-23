@@ -1,0 +1,9 @@
+country=US
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+
+network={
+scan_ssid=1
+ssid="VODAFONE_WIFI_108-00315"
+psk="F6V3YTQJ3D"
+}

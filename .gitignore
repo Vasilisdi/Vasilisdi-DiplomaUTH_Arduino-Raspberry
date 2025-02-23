@@ -10,3 +10,8 @@ Archive/
 
 # Ignore the file that contains the configuration file for the raspberry that is on Raspbian lite - to be used so as to connect to your router
 wpa_supplicant.conf
+
+# After running poetry run python -m testing.test_methods which in turn ensure that aeverything is part of a project, additional files are generated 
+__pycache__/
+*.pyc
+**/__init__.py

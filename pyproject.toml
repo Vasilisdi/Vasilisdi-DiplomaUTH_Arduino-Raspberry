@@ -7,9 +7,19 @@ license = ""
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.11.3"
+python = "^3.11.3"  # Python version compatibility
+pyyaml = "^6.0.2"  # YAML parsing library
+python-dotenv = "^1.0.1" # Load environment variables from .env file
+numpy = "^2.2.3"
 
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+
+
+#So the poetry adds:
+#python add pyyaml
+#poetry add python-dotenv
+#poetry add numpy

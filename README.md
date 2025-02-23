@@ -28,7 +28,12 @@ PYTHONPATH=/home/VASILIS/repos/Vibration-Analysis-Project/raspberry poetry run p
 or
 
 cd repos/Diploma \Thesis/raspberry 
-PYTHONPATH=/home/VASILIS/repos/Diploma \Thesis/raspberry poetry run python3.12 Testing/test_methods.py
+PYTHONPATH=/home/VASILIS/repos/Diploma \Thesis/raspberry poetry run python3.12 testing/test_methods.py
+
+and 
+
+in the case of probing on a PC use relative imports and ensure everything is set up as part of a package and python locates folder and the file.
+poetry run python -m testing.test_methods
 ```
 
 

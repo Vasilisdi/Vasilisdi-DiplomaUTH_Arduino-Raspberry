@@ -43,6 +43,63 @@ poetry run python -m testing.test_methods
 poetry shell
 ```
 
+# Project Setup and Testing Guide
+
+## Prerequisites
+Ensure you have [Poetry](https://python-poetry.org/) installed on your system. If Poetry is not installed, you can install it using the following command:
+
+```sh
+curl -sSL https://install.python-poetry.org | python3 -
+```
+
+Additionally, ensure that Poetry’s binary path is available in your system’s `PATH` variable:
+
+```sh
+export PATH="$HOME/.local/bin:$PATH"
+```
+
+To make this change permanent, add the above line to your `~/.bashrc` or `~/.zshrc` file:
+
+```sh
+echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
+source ~/.bashrc  # or source ~/.zshrc if using Zsh
+```
+
+## Setting Up the Environment
+Once Poetry is installed, you need to activate the virtual environment created by Poetry. Run the following command:
+
+```sh
+source $(poetry env info --path)/bin/activate
+```
+
+This ensures that your Python environment is properly configured for the project.
+
+## Running Tests
+After setting up the environment, you can execute the test suite by running:
+
+```sh
+poetry run python -m testing.test_methods
+```
+
+This command ensures that Python runs the `test_methods.py` module inside the `testing` package within the Poetry environment.
+
+## Troubleshooting
+- If `poetry` is not recognized, restart your terminal or re-run the `export PATH` command.
+- If the virtual environment is not found, recreate it using:
+
+  ```sh
+  poetry env remove python
+  poetry install
+  ```
+
+This will remove the existing environment and install all dependencies again.
+
+---
+
+Now you have a fully documented setup guide in your `README.md` file! 🚀
+
+
+
 
 
 ## Deactivating the virtual environment

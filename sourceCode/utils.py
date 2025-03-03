@@ -45,3 +45,12 @@ def get_api_key():
         logging.warning("API_KEY is not set in the environment.")
         return None  # Return None instead of raising an error
     return api_key
+
+def get_supabase_url():
+    """Retrieve Supabase URL from environment variables."""
+    load_env_variables()  # Ensure environment variables are loaded
+    surl = os.getenv('SUPABASE_URL')
+    if not surl:
+        logging.warning("SUPABASE_URL is not set in the environment.")
+        return None  # Return None if SUPABASE_URL is not set
+    return surl

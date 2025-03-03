@@ -50,6 +50,16 @@ This command directly imports and prints the result of `load_config()` from `sou
 - Verify `PYTHONPATH` includes the correct project directory.
 - Run `poetry shell` before executing Python commands to ensure the correct environment is active.
 
+### Debugging API Configuration
+
+To verify that the API key and Supabase URL are correctly loaded, run:
+
+```sh
+poetry run python -c "from sourceCode.api import VibrationMonitoringAPI; api = VibrationMonitoringAPI(); print(api.url, api.api_key)"
+```
+
+This command initializes the `VibrationMonitoringAPI` class and prints the loaded API key and Supabase URL.
+
 ## Activating the virtual environment
 
 ```sh

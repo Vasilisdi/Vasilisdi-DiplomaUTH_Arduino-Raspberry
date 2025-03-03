@@ -15,3 +15,6 @@ wpa_supplicant.conf
 __pycache__/
 *.pyc
 **/__init__.py
+
+# Ignore the idea Idea intepreter
+.idea/

@@ -24,7 +24,7 @@ class VibrationMonitoringAPI:
         # Initialize headers using the loaded API key
         self.headers = {
             'accept': 'application/json',
-            'x-api-key': self.api_key,
+            'apikey': self.api_key,
             'Content-Type': 'application/json'
         }
 
@@ -57,8 +57,14 @@ class VibrationMonitoringAPI:
         
         # Log the response status and data
         logging.info(f"API Response Status Code: {response.status_code}")
-        logging.info(f"API Response JSON: {response.json()}")
-        logging.info(f"API Key: {self.api_key}")
-        logging.info(f"Headers: {self.headers}")
+        # ✅ Check if response has content before parsing JSON
+        if response.text.strip():  # Ensure response is not empty
+            try:
+                logging.info(f"API Response JSON: {response.json()}")
+            except requests.exceptions.JSONDecodeError:
+                logging.warning("API Response is not JSON (empty or invalid format).")
+        else:
+            logging.info("API Response is empty (no JSON returned).")
+
         
         return response.status_code, response.json()

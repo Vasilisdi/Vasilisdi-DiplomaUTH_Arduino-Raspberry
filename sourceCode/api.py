@@ -51,6 +51,14 @@ class VibrationMonitoringAPI:
 #na diorthosoume to out of range sta coordinates - na dw giati to kanei
 #na doume giati ksekinaei 2 fores me to yalm 
 #na doyme to cronjob
-
+        logging.info(f"Payload being sent: {json.dumps(payload, indent=4)}")
+        
         response = requests.post(self.url, headers=self.headers, data=json.dumps(payload))
+        
+        # Log the response status and data
+        logging.info(f"API Response Status Code: {response.status_code}")
+        logging.info(f"API Response JSON: {response.json()}")
+        logging.info(f"API Key: {self.api_key}")
+        logging.info(f"Headers: {self.headers}")
+        
         return response.status_code, response.json()

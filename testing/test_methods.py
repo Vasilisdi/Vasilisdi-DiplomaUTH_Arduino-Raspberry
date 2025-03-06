@@ -2,7 +2,7 @@ import time
 import numpy as np
 from sourceCode.utils import load_config
 from sourceCode.data_processing import compute_envelope, compute_fft, calculate_amplitude, plot_fft, unbalancing
-from sourceCode.serial_comm import setup_serial_connection, read_serial_data
+from sourceCode.serial_communication import setup_serial_connection, read_serial_data
 
 
 # Load configuration

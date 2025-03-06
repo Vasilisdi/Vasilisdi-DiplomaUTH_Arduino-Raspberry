@@ -2,7 +2,7 @@ import requests
 import json
 import logging
 from sourceCode.utils import load_config, get_api_key, get_supabase_url
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timezone
 
 config = load_config()
 

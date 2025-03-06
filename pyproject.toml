@@ -12,6 +12,9 @@ pyyaml = "^6.0.2"  # YAML parsing library
 python-dotenv = "^1.0.1" # Load environment variables from .env file
 numpy = "^2.2.3"
 requests = "^2.32.3"
+pyserial = "^3.5"
+matplotlib = "^3.10.1"
+scipy = "^1.15.2"
 
 
 [build-system]
@@ -24,3 +27,6 @@ build-backend = "poetry.core.masonry.api"
 #poetry add python-dotenv
 #poetry add numpy
 #poetry add requests
+#poetry add pyserial
+#poetry add matplotlib
+#poetry add scipy

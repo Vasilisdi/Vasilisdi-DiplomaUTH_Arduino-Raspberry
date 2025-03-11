@@ -1,5 +1,28 @@
 # Raspberry Pi
 
+
+## Prerequisites
+
+Ensure you have [Poetry](https://python-poetry.org/) installed on your system. If Poetry is not installed, you can install it using the following command:
+
+```sh
+curl -sSL https://install.python-poetry.org | python3 -
+```
+
+Additionally, ensure that Poetry’s binary path is available in your system’s `PATH` variable:
+
+```sh
+export PATH="$HOME/.local/bin:$PATH"
+```
+
+To make this change permanent (not mendatory), add the above line to your `~/.bashrc` or `~/.zshrc` file:
+
+```sh
+echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
+source ~/.bashrc  # or source ~/.zshrc if using Zsh
+```
+
+
 ## Installation
 
 Install `poetry`. Install the dependencies using `poetry`:
@@ -12,11 +35,53 @@ poetry install
 
 Create a `.env` similar to `.env.sample` and set the values in the file. Modify the `config/config.yaml` file if needed to set the required values.
 
+## Activating the virtual environment
+
+```sh
+poetry shell
+```
+
+An alternative to activating the virtual environment created by Poetry is running the following command (applicable in newer versions of poetry):
+
+```sh
+source $(poetry env info --path)/bin/activate
+```
+
+This ensures that your Python environment is properly configured for the project.
+
+
 ## Running the project
 
 ```sh
 poetry run python ....
 ```
+
+### Troubleshooting
+
+- If `poetry` is not recognized, restart your terminal or re-run the `export PATH` command.
+- If the virtual environment is not found, recreate it using:
+
+### Reinstall all dependencies
+
+Remove the existing Poetry environment
+```sh
+poetry env remove python
+```
+And reinstall
+```sh
+poetry install  # Installs all necessary libraries
+```
+
+### Test data posting to Supabase
+```sh
+poetry run python -c "
+from sourceCode.api import VibrationMonitoringAPI
+api = VibrationMonitoringAPI()
+api.send_measurement(coordinate='TEST', values=[1, 2, 3, 4, 5])
+"  # Verifies the ability to post data to Supabase
+
+```
+
 
 ### Locate the project folder in Raspberry Pi and run a command that resembles the following (via SSH):
 
@@ -60,46 +125,20 @@ poetry run python -c "from sourceCode.api import VibrationMonitoringAPI; api = V
 
 This command initializes the `VibrationMonitoringAPI` class and prints the loaded API key and Supabase URL.
 
-## Activating the virtual environment
-
+As articulated above, there is also the option of checking the data posting possiblility: 
 ```sh
-poetry shell
+poetry run python -c "
+from sourceCode.api import VibrationMonitoringAPI
+api = VibrationMonitoringAPI()
+api.send_measurement(coordinate='TEST', values=[1, 2, 3, 4, 5])
+"  # Verifies the ability to post data to Supabase
 ```
 
-# Project Setup and Testing Guide
 
-## Prerequisites
 
-Ensure you have [Poetry](https://python-poetry.org/) installed on your system. If Poetry is not installed, you can install it using the following command:
 
-```sh
-curl -sSL https://install.python-poetry.org | python3 -
-```
 
-Additionally, ensure that Poetry’s binary path is available in your system’s `PATH` variable:
-
-```sh
-export PATH="$HOME/.local/bin:$PATH"
-```
-
-To make this change permanent, add the above line to your `~/.bashrc` or `~/.zshrc` file:
-
-```sh
-echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
-source ~/.bashrc  # or source ~/.zshrc if using Zsh
-```
-
-## Setting Up the Environment
-
-Once Poetry is installed, you need to activate the virtual environment created by Poetry. Run the following command:
-
-```sh
-source $(poetry env info --path)/bin/activate
-```
-
-This ensures that your Python environment is properly configured for the project.
-
-## Running Tests
+## Running Tests files
 
 After setting up the environment, you can execute the test suite by running:
 
@@ -109,14 +148,7 @@ poetry run python -m testing.test_methods
 
 This command ensures that Python runs the `test_methods.py` module inside the `testing` package within the Poetry environment.
 
-## Troubleshooting
 
-- If `poetry` is not recognized, restart your terminal or re-run the `export PATH` command.
-- If the virtual environment is not found, recreate it using:
-  ```sh
-  poetry env remove python
-  poetry install
-  ```
 
 This will remove the existing environment and install all dependencies again.
 

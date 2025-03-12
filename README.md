@@ -15,7 +15,7 @@ Additionally, ensure that Poetry’s binary path is available in your system’s
 export PATH="$HOME/.local/bin:$PATH"
 ```
 
-To make this change permanent (not mendatory), add the above line to your `~/.bashrc` or `~/.zshrc` file:
+To make this change permanent (not mandatory), add the above line to your `~/.bashrc` or `~/.zshrc` file:
 
 ```sh
 echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
@@ -74,12 +74,7 @@ poetry install  # Installs all necessary libraries
 
 ### Test data posting to Supabase
 ```sh
-poetry run python -c "
-from sourceCode.api import VibrationMonitoringAPI
-api = VibrationMonitoringAPI()
-api.send_measurement(coordinate='TEST', values=[1, 2, 3, 4, 5])
-"  # Verifies the ability to post data to Supabase
-
+poetry run python -c "from sourceCode.api import VibrationMonitoringAPI; api = VibrationMonitoringAPI(); api.send_measurement(coordinate='TEST', values=[1, 2, 3, 4, 5])" # Verifies the ability to post data to Supabase
 ```
 
 

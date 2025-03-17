@@ -74,7 +74,7 @@ poetry install  # Installs all necessary libraries
 
 ### Test data posting to Supabase
 ```sh
-poetry run python -c "from sourceCode.api import VibrationMonitoringAPI; api = VibrationMonitoringAPI(); api.send_measurement(coordinate='TEST', values=[1, 2, 3, 4, 5])" # Verifies the ability to post data to Supabase
+poetry run python -c "from sourceCode.api import VibrationMonitoringAPI; api = VibrationMonitoringAPI(); api.send_measurement(sensor_name='Test Sensor', coordinate='TEST', values=[1, 2, 3, 4, 5])" # Verifies the ability to post data to Supabase
 ```
 
 
@@ -115,7 +115,7 @@ This command directly imports and prints the result of `load_config()` from `sou
 To verify that the API key and Supabase URL are correctly loaded, run:
 
 ```sh
-poetry run python -c "from sourceCode.api import VibrationMonitoringAPI; api = VibrationMonitoringAPI(); print(api.url, api.api_key)"
+poetry run python -c "from sourceCode.api import VibrationMonitoringAPI; api = VibrationMonitoringAPI(); print(api.purl, api.api_key)"
 ```
 
 This command initializes the `VibrationMonitoringAPI` class and prints the loaded API key and Supabase URL.

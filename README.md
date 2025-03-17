@@ -122,11 +122,7 @@ This command initializes the `VibrationMonitoringAPI` class and prints the loade
 
 As articulated above, there is also the option of checking the data posting possiblility: 
 ```sh
-poetry run python -c "
-from sourceCode.api import VibrationMonitoringAPI
-api = VibrationMonitoringAPI()
-api.send_measurement(coordinate='TEST', values=[1, 2, 3, 4, 5])
-"  # Verifies the ability to post data to Supabase
+poetry run python -c "from sourceCode.api import VibrationMonitoringAPI; api = VibrationMonitoringAPI(); api.send_measurement(sensor_name='Test Sensor', coordinate='TEST', values=[1, 2, 3, 4, 5])" # Verifies the ability to post data to Supabase
 ```
 
 

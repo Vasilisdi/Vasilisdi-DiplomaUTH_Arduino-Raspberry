@@ -1,4 +1,4 @@
-# Raspberry Pi
+# Testing Phase
 
 
 ## Prerequisites
@@ -149,3 +149,11 @@ This will remove the existing environment and install all dependencies again.
 exit
 ```
 
+
+# Actual - Raspberry Connected to Arduino Phase
+
+In this case, the main script is to be executed so as to post real data on the supabase:
+
+```sh
+poetry run python sourceCode/main.py
+```

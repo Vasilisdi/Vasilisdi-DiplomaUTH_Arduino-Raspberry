@@ -1,7 +1,7 @@
 import requests
 import json
 import logging
-from sourceCode.utils import load_config, get_api_key, get_supabase_url_posting, get_supabase_url_selecting
+from utils import load_config, get_api_key, get_supabase_url_posting, get_supabase_url_selecting
 from datetime import datetime, timezone
 from zoneinfo import ZoneInfo
 
@@ -75,7 +75,7 @@ class VibrationMonitoringAPI:
 #na diorthosoume to out of range sta coordinates - na dw giati to kanei
 #na doume giati ksekinaei 2 fores me to yalm 
 #na doyme to cronjob
-        logging.info(f"Payload being sent: {json.dumps(payload, indent=4)}")
+        #logging.info(f"Payload being sent: {json.dumps(payload, indent=4)}")
         
         response = requests.post(self.purl, headers=self.headers, data=json.dumps(payload))
         
@@ -91,15 +91,13 @@ class VibrationMonitoringAPI:
             logging.info("API Response is empty (no JSON returned).")
 
         
-        return response.status_code, response.json()
+        return response.status_code
 
 
     # New method to get sensor_id from sensor_name
     def get_sensor_id(self, sensor_name):
         query_url = f"{self.surl}?sensor_name=eq.{sensor_name}"
-        print(query_url)
         response = requests.get(query_url, headers=self.headers)
-        print(response)
         if response.status_code == 200:
             data = response.json()
             if data:

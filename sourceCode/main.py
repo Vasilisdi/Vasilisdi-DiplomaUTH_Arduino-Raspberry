@@ -10,14 +10,16 @@ config = load_config()
 
 # Load API key from environment variable
 api_key = get_api_key()
-surl = get_supabase_url()
+
 if not api_key:
     raise ValueError("API key not found. Please set the API_KEY environment variable.")
 
-vibration_api = VibrationMonitoringAPI(api_key)
+vibration_api = VibrationMonitoringAPI()
 
 baud_rate = config['serial']['baud_rate']
-port = config['serial']['port_windows']
+port = config['serial']['port_linux']
+#port = config['serial']['port_windows']
+
 ser = setup_serial_connection(port, baud_rate)
 
 history = []
@@ -59,11 +61,10 @@ try:
         ylabels = ["|P1(f)|", "|P1X(f)|", "|P1Y(f)|", "|P1Z(f)|"]
         #plot_fft(values, f, titles[i], ylabels[i])
 
-        coordinate = ["X", "Y", "Z"]
-        api = VibrationMonitoringAPI(api_key)
+        coordinate = ["Magnitude", "X", "Y", "Z"]
+        api = VibrationMonitoringAPI()
 
-        status_code, response_json = api.send_measurement(coordinate[i], values.tolist() , start_time , timestamp)
-        print(response_json)
+        status_code = api.send_measurement('Test', coordinate[i], values.tolist() , start_time , timestamp)
 
 
 

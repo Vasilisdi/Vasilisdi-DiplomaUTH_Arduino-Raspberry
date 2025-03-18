@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "DiplomaThesis"
+name = "diplomathesis"
 version = "0.1.0"
 description = ""
 authors = ["Vasileios Dimitriou"]
@@ -15,6 +15,7 @@ requests = "^2.32.3"
 pyserial = "^3.5"
 matplotlib = "^3.10.1"
 scipy = "^1.15.2"
+tzdata = "^2025.1"
 
 
 [build-system]
@@ -30,3 +31,4 @@ build-backend = "poetry.core.masonry.api"
 #poetry add pyserial
 #poetry add matplotlib
 #poetry add scipy
+#poetry add tzdata

@@ -50,6 +50,8 @@ try:
     #L = len(history)
     L = 1000   #number of FFT points - output vector length
 
+    print(f" raw data : len={len(history_X)}")
+
     for i, data in enumerate([history, history_X, history_Y, history_Z]):
         values, f = compute_fft(data, Fs, L)
         titles = [

@@ -62,6 +62,9 @@ try:
         #plot_fft(values, f, titles[i], ylabels[i])
 
         coordinate = ["Magnitude", "X", "Y", "Z"]
+
+        print(f"{coordinate[i]}: len={len(values)}")
+
         api = VibrationMonitoringAPI()
 
         status_code = api.send_measurement('Test', coordinate[i], values.tolist() , start_time , timestamp)

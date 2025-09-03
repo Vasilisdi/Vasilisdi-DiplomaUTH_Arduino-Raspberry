@@ -43,7 +43,7 @@ try:
     time_diffs = np.diff(timestamps)
     Fs = 1 / np.mean(time_diffs)
 
-    L = 1000   #number of FFT points - output vector length
+    L = config['Len']   #number of FFT points - output vector length
     ylabels = ["|P1(f)|", "|P1X(f)|", "|P1Y(f)|", "|P1Z(f)|"]
 
     for i, data in enumerate([history, history_X, history_Y, history_Z]):
@@ -56,7 +56,14 @@ try:
         ]
 
         #print(f)
+
+        print(f"Sampling rate: {Fs} Hz")
+        print(f"Frequency resolution: {Fs/L} Hz per bin")
+
+
         print(unbalancing(f,rpm,P1,threshold))
+        print(f"Frequency domain upper value: {f[-1]} Hz")
+
         plot_fft(P1, f, titles[i], ylabels[i])
 
     for i,data in enumerate([history, history_X, history_Y, history_Z]):
@@ -67,3 +74,4 @@ try:
 
 except KeyboardInterrupt:
     ser.close()
+    

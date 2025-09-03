@@ -27,16 +27,15 @@ def plot_fft(P1, f, title, ylabel):
     plt.show()
 
 
-def unbalancing(frequency,rpm,spectrum,threshold): 
-    #index = f.index(rpm)  to be used in main.py
+def unbalancing(frequency, rpm, spectrum, threshold): 
     index = np.where((frequency > 0.999 * rpm) & (frequency < 1.001 * rpm))
-    #print(index)
     frq = frequency[index]
     amplitude = spectrum[index]
 
-    if amplitude > threshold:
+    if amplitude.max() > threshold:  # Use max amplitude
         status = 'Shaft needs to be balanced'
     else:
         status = 'Balancing is ok'
     
     return f"RPM: {frq}, Amplitude: {amplitude}, Status: {status}"
+

@@ -54,7 +54,7 @@ class VibrationMonitoringAPI:
         return start_measurement_str, end_measurement_str
 
     # end_measurement is now is not specified
-    def send_measurement(self, sensor_name, coordinate, values, start_measurement = datetime.now(timezone.utc), end_measurement = datetime.now(timezone.utc)):
+    def send_measurement(self, sensor_name, coordinate, values, frequencies, start_measurement = datetime.now(timezone.utc), end_measurement = datetime.now(timezone.utc)):
         start_measurement_str, end_measurement_str = self.get_time(start_measurement, end_measurement)
 
         # Lookup sensor_id from sensor_name
@@ -68,7 +68,8 @@ class VibrationMonitoringAPI:
             "startMeasurement": start_measurement_str,
             "endMeasurement": end_measurement_str,
             "coordinate": coordinate,
-            "values": values
+            "values": values,
+            "frequencies": frequencies
         }
 
 #edw exoume thema me to rpm na travhksoume apo config

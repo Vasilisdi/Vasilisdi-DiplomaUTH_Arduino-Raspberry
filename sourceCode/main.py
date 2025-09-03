@@ -69,7 +69,7 @@ try:
 
         api = VibrationMonitoringAPI()
 
-        status_code = api.send_measurement('Test', coordinate[i], values.tolist() , start_time , timestamp)
+        status_code = api.send_measurement('Test', coordinate[i], values.tolist(), f.tolist() , start_time , timestamp)
 
 
 

@@ -48,7 +48,7 @@ try:
     time_diffs = np.diff(timestamps)
     Fs = 1 / np.mean(time_diffs)
     #L = len(history)
-    L = 1000   #number of FFT points - output vector length
+    L = config['Len']   #number of FFT points - output vector length
 
     print(f" raw data : len={len(history_X)}")
 

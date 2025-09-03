@@ -4,7 +4,7 @@ serial:
   # This applies in the case of Windows OS
   port_windows: "COM3"
   baud_rate: 115200
-time_window: 30
+time_window: 60
 #user defined
 rpm: 300
 bpfi: 3.4

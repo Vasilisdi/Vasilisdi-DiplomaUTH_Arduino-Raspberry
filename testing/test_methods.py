@@ -1,7 +1,7 @@
 import time
 import numpy as np
 from sourceCode.utils import load_config
-from sourceCode.data_processing import compute_envelope, compute_fft, calculate_amplitude, plot_fft, unbalancing
+from sourceCode.data_processing import compute_envelope, compute_fft, calculate_amplitude, plot_fft, plot_td, unbalancing
 from sourceCode.serial_communication import setup_serial_connection, read_serial_data
 
 
@@ -13,6 +13,7 @@ baud_rate = config['serial']['baud_rate']
 port = config['serial']['port_windows']
 rpm = config['rpm']
 threshold = config['threshold']
+time_window = config['time_window']
 ser = setup_serial_connection(port, baud_rate)
 
 time.sleep(1)
@@ -45,6 +46,7 @@ try:
 
     L = config['Len']   #number of FFT points - output vector length
     ylabels = ["|P1(f)|", "|P1X(f)|", "|P1Y(f)|", "|P1Z(f)|"]
+    ylabelst = ["Magnitude[t]" , "X[t]" , "Y[t]" , "Z[t]"]
 
     for i, data in enumerate([history, history_X, history_Y, history_Z]):
         P1, f = compute_fft(data, Fs, L)
@@ -65,6 +67,7 @@ try:
         print(f"Frequency domain upper value: {f[-1]} Hz")
 
         plot_fft(P1, f, titles[i], ylabels[i])
+        plot_td(data, np.linspace(0, time_window, len(data)) , "time [s]", ylabelst[i])
 
     for i,data in enumerate([history, history_X, history_Y, history_Z]):
         Envelope = compute_envelope(data)

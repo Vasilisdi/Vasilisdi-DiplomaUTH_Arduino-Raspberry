@@ -26,6 +26,14 @@ def plot_fft(P1, f, title, ylabel):
     plt.ylabel(ylabel)
     plt.show()
 
+def plot_td(historicalData, t, title, ylabel):
+    plt.figure()
+    plt.plot(t, historicalData , linewidth=3)
+    plt.title(title)
+    plt.xlabel("Time [s]")
+    plt.ylabel(ylabel)
+    plt.show()
+
 
 def unbalancing(frequency, rpm, spectrum, threshold): 
     index = np.where((frequency > 0.999 * rpm) & (frequency < 1.001 * rpm))

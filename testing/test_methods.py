@@ -1,7 +1,7 @@
 import time
 import numpy as np
 from sourceCode.utils import load_config
-from sourceCode.data_processing import compute_envelope, compute_fft, calculate_amplitude, plot_fft, plot_td, unbalancing
+from sourceCode.data_processing import compute_envelope, compute_fft, calculate_magnitude, plot_fft, plot_td, unbalancing
 from sourceCode.serial_communication import setup_serial_connection, read_serial_data
 
 
@@ -33,11 +33,11 @@ try:
         timestamp = time.time()
         timestamps.append(timestamp)
         col_1, col_2, col_3 = read_serial_data(ser)
-        amplitude = calculate_amplitude(col_1, col_2, col_3)
-        history.append(amplitude)
-        history_X.append(col_1)
-        history_Y.append(col_2)
-        history_Z.append(col_3)
+        amplitude = calculate_magnitude(col_1, col_2, col_3)
+        history.append(((amplitude*(5 / 1023))-2.5)/0.3)
+        history_X.append(((col_1*(5 / 1023))-2.5)/0.3)
+        history_Y.append(((col_2*(5 / 1023))-2.5)/0.3)
+        history_Z.append(((col_3*(5 / 1023))-2.5)/0.3)
 
     # Calculate the actual sampling rate
     # Calculate time differences between successive data points

@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta, timezone
 from api import VibrationMonitoringAPI
-from data_processing import calculate_amplitude, compute_fft
+from data_processing import calculate_magnitude, compute_fft
 from serial_communication import setup_serial_connection, read_serial_data
 from utils import get_api_key, load_config
 import numpy as np
@@ -36,11 +36,12 @@ try:
         timestamp = datetime.now(timezone.utc)
         timestamps.append(timestamp.timestamp())
         col_1, col_2, col_3 = read_serial_data(ser)
-        amplitude = calculate_amplitude(col_1, col_2, col_3)
-        history.append(amplitude)
-        history_X.append(col_1)
-        history_Y.append(col_2)
-        history_Z.append(col_3)
+        amplitude = calculate_magnitude(col_1, col_2, col_3)
+        history.append(((amplitude*(5 / 1023))-2.5)/0.3)
+        history_X.append(((col_1*(5 / 1023))-2.5)/0.3)
+        history_Y.append(((col_2*(5 / 1023))-2.5)/0.3)
+        history_Z.append(((col_3*(5 / 1023))-2.5)/0.3)
+
 
 
     # Calculate the actual sampling rate

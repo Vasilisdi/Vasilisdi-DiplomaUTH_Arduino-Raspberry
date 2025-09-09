@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import math
 import scipy.signal as signal
 
-def calculate_amplitude(col_1, col_2, col_3):
+def calculate_magnitude(col_1, col_2, col_3):
     return math.sqrt(col_1**2 + col_2**2 + col_3**2)
 
 def compute_fft(data, Fs, L):

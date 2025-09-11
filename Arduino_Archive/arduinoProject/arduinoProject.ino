@@ -15,6 +15,7 @@ void setup() {
     for (int i = 0; i < numChannels; i++) {
         bufferIndex[i] = 0;
     }
+    analogReference(EXTERNAL);
 }
 
 void loop() {

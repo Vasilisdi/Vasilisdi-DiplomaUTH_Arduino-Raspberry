@@ -34,10 +34,10 @@ try:
         timestamps.append(timestamp)
         col_1, col_2, col_3 = read_serial_data(ser)
         amplitude = calculate_magnitude(col_1, col_2, col_3)
-        history.append(((amplitude*(5 / 1023))-2.5)/0.3)
-        history_X.append(((col_1*(5 / 1023))-2.5)/0.3)
-        history_Y.append(((col_2*(5 / 1023))-2.5)/0.3)
-        history_Z.append(((col_3*(5 / 1023))-2.5)/0.3)
+        history.append(((amplitude*(3.3 / 1023))-1.65)/0.33)
+        history_X.append(((col_1*(3.3 / 1023))-1.65)/0.33)
+        history_Y.append(((col_2*(3.3 / 1023))-1.65)/0.33)
+        history_Z.append(((col_3*(3.3 / 1023))-1.65)/0.33)
 
     # Calculate the actual sampling rate
     # Calculate time differences between successive data points

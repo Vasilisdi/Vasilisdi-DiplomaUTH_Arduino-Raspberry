@@ -35,6 +35,30 @@ def plot_td(historicalData, t, title, ylabel):
     plt.show()
 
 
+def plot_fft_and_td(f, P1, time, data, title_fft, ylabel_fft, ylabel_td):
+    fig, axs = plt.subplots(2, 1, figsize=(10, 6))
+
+    # FFT
+    axs[0].plot(f, P1, linewidth=2)
+    axs[0].axhline(y=1, color='r', linestyle='--', linewidth=1)
+    axs[0].set_title(title_fft)
+    axs[0].set_xlabel("Frequency [Hz]")
+    axs[0].set_ylabel(ylabel_fft)
+    axs[0].set_xlim(0, 300)  # Restrict x-axis to 0–300 Hz
+    #axs[0].set_ylim(0, 0.1)  # Restrict x-axis to 0–300 Hz
+    axs[0].grid(True)
+
+    # Time-domain
+    axs[1].plot(time, data, linewidth=2)
+    axs[1].set_title("Time-domain Signal")
+    axs[1].set_xlabel("Time [s]")
+    axs[1].set_ylabel(ylabel_td)
+    axs[1].grid(True)
+
+    plt.tight_layout()
+    plt.show()
+
+
 def unbalancing(frequency, rpm, spectrum, threshold): 
     index = np.where((frequency > 0.999 * rpm) & (frequency < 1.001 * rpm))
     frq = frequency[index]

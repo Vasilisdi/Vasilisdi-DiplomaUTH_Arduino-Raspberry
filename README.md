@@ -1,4 +1,17 @@
-# Testing Phase
+# Repository Introduction
+
+This repository contains 2 different running sections. The first section is this of testing. There is the files test_data_from_datasets1.py and test_data_from_datasets2.py. These 2 files run the raw test data files, that are uploaded in the testing folder. The frequenct spectra of the defective machine waveforms are to be ploted on some figure for visual analysis and illustration. (following detailed instructions on this).
+
+A results folder is stored in the testing folder. The aforementioned results will be saved in there.
+
+In addition to this, there is the sourceCode folder, containing the main.py file and some other auxiliary files. This file is designed for the case of the continuous monitoring case, using cronjob set at collecting data four times a day. (further instructions bellow)
+
+- test_data_from_datasets1.py for test datasets model validation.
+- test_data_from_datasets2.py for test datasets model validation.
+- main.py for real-life machine applications.
+
+
+# Testing Phase Running
 
 
 ## Prerequisites
@@ -21,6 +34,8 @@ To make this change permanent (not mandatory), add the above line to your `~/.ba
 echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
 source ~/.bashrc  # or source ~/.zshrc if using Zsh
 ```
+
+Also ensure the an .env file is created following the .env.example file as a template. This is going to be filled with sensitive credentials of your supabase project.
 
 
 ## Installation

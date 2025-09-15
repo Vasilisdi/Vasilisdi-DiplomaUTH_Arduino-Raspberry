@@ -50,12 +50,6 @@ source $(poetry env info --path)/bin/activate
 This ensures that your Python environment is properly configured for the project.
 
 
-## Running the project
-
-```sh
-poetry run python ....
-```
-
 ### Troubleshooting
 
 - If `poetry` is not recognized, restart your terminal or re-run the `export PATH` command.
@@ -126,9 +120,15 @@ poetry run python -c "from sourceCode.api import VibrationMonitoringAPI; api = V
 ```
 
 
+## Deactivating the virtual environment
+
+```sh
+exit
+```
 
 
 
+# Testing and Validation
 ## Running Tests files
 
 After setting up the environment, you can execute the test suite by running:
@@ -141,13 +141,28 @@ This command ensures that Python runs the `test_methods.py` module inside the `t
 
 
 
-This will remove the existing environment and install all dependencies again.
+## Concept validation
 
-## Deactivating the virtual environment
+To run tests for processing vibration datasets:
 
 ```sh
-exit
+poetry run python -m testing.test_data_from_datasets1
+poetry run python -m testing.test_data_from_datasets2
 ```
+
+These commands are used for the faulty machinery datasets included in the folders:
+
+-Test processing for the VBL-VA001 dataset "poetry run python -m testing.test_data_from_datasets1"
+-Test processing for the HUST Bearing dataset "poetry run python -m testing.test_data_from_datasets2"
+
+Data files are mixed but they can be easily identified since HUST Bearing dataset uses the following format "I802" while the VBL-VA001 dataset is formated like so: "ub_06_000-3_Ch08_100g_PE_Acceleration".
+
+This executable file have as an input the time-domain waveforms and convert data into the frequency domain.
+
+
+
+
+
 
 
 # Actual - Raspberry Connected to Arduino Phase
@@ -157,3 +172,5 @@ In this case, the main script is to be executed so as to post real data on the s
 ```sh
 poetry run python sourceCode/main.py
 ```
+
+

@@ -1,0 +1,2 @@
+The csv file includes the 3 posted data to the supabase, there is x,y,z and magnitude values, while the data transmitting.png figure depicts the validation method using SQL commands.
+In addition, screenshots were taken so as to illustrate what the condition monitoring looks like in vercel.

@@ -1,8 +1,7 @@
 # Repository Introduction
+In the repository there is the "results" folder containing the results of the testing phase and the deployment phase on a rotating fan. While the "dataset" folder is used for validation and visual checks.
 
-This repository contains 2 different running sections. The first section is this of testing. There is the files test_data_from_datasets1.py and test_data_from_datasets2.py. These 2 files run the raw test data files, that are uploaded in the testing folder. The frequenct spectra of the defective machine waveforms are to be ploted on some figure for visual analysis and illustration. (following detailed instructions on this).
-
-A results folder is stored in the testing folder. The aforementioned results will be saved in there.
+This repository contains 2 different running sections. The first section is this of testing. There is the files test_data_from_datasets1.py and test_data_from_datasets2.py.  The frequenct spectra of the defective machine waveforms are to be ploted on some figure for visual analysis and illustration. (following detailed instructions on this).
 
 In addition to this, there is the sourceCode folder, containing the main.py file and some other auxiliary files. This file is designed for the case of the continuous monitoring case, using cronjob set at collecting data four times a day. (further instructions bellow)
 

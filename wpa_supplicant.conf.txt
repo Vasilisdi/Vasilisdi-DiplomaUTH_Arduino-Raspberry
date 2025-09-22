@@ -7,3 +7,8 @@ scan_ssid=1
 ssid="VODAFONE_WIFI_108-00315"
 psk="F6V3YTQJ3D"
 }
+
+network={
+ssid="POCO F5"
+psk="....."
+}

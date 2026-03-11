@@ -1,0 +1,10 @@
+^C:\USERS\ARIAN\DESKTOP\VASILISDI-DIPLOMAUTH_ARDUINO-RASPBERRY\SOURCECODE\BUILD\CMAKEFILES\B15C450DBEB24F78A7A032170C238874\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Users/arian/Desktop/Vasilisdi-DiplomaUTH_Arduino-Raspberry/sourceCode -BC:/Users/arian/Desktop/Vasilisdi-DiplomaUTH_Arduino-Raspberry/sourceCode/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/arian/Desktop/Vasilisdi-DiplomaUTH_Arduino-Raspberry/sourceCode/build/VasilisdiProject.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

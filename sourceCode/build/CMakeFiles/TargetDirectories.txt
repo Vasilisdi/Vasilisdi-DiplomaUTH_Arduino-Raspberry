@@ -1,0 +1,3 @@
+C:/Users/arian/Desktop/Vasilisdi-DiplomaUTH_Arduino-Raspberry/sourceCode/build/CMakeFiles/main.dir
+C:/Users/arian/Desktop/Vasilisdi-DiplomaUTH_Arduino-Raspberry/sourceCode/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/arian/Desktop/Vasilisdi-DiplomaUTH_Arduino-Raspberry/sourceCode/build/CMakeFiles/ZERO_CHECK.dir

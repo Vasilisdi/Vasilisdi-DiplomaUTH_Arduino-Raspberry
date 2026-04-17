@@ -1,0 +1,23 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build with MSVC",
+            "type": "shell",
+            "command": "cl.exe",
+            "options": {
+                "cwd": "${workspaceFolder}"   // or "${workspaceFolder}" if you are in the root that contains sourceCode
+            },
+            "args": [
+                "/EHsc",
+                "/std:c++17",
+                "main.cpp",
+                "/I", "C:/vcpkg/installed/x64-windows/include",
+                "/link",
+                "/LIBPATH:C:/vcpkg/installed/x64-windows/lib"
+            ],
+            "group": "build",
+            "problemMatcher": ["$msCompile"]
+        }
+    ]
+}

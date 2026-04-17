@@ -1,20 +1,67 @@
-# Ignore virtual environment folders
-.venv/
-venv/
-
-# Ignore environment variable files (except .env.sample)
-.env
-
-# Ignore archived files
-Archive/
-
-# Ignore the file that contains the configuration file for the raspberry that is on Raspbian lite - to be used so as to connect to your router
-wpa_supplicant.conf
-
-# After running poetry run python -m testing.test_methods which in turn ensure that aeverything is part of a project, additional files are generated 
+###############################################
+# PYTHON
+###############################################
 __pycache__/
 *.pyc
-**/__init__.py
+*.pyo
+*.pyd
+*.pdb
+*.pkl
+*.egg-info/
+*.egg
+*.log
 
-# Ignore the idea Idea intepreter
-.idea/
+# Poetry
+.venv/
+venv/
+poetry.lock
+poetry.toml
+
+# Environment variables
+.env
+.env.*
+
+# Testing artifacts
+.coverage
+htmlcov/
+.cache/
+pytest_cache/
+
+###############################################
+# C++ / CMake / Build Artifacts
+###############################################
+# Build directories
+build/
+build*/        # build, build-debug, build-release, etc.
+
+# CMake generated files
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# Compiled objects and binaries
+*.a
+*.o
+*.obj
+*.so
+*.dll
+*.lib
+*.exe
+
+# Visual Studio / MSVC generated files
+*.vcxproj
+*.vcxproj.filters
+*.sln
+*.user
+*.opensdf
+*.sdf
+*.cachefile
+
+###############################################
+# BOOST DLLs (runtime only)
+###############################################
+boost_*.dll
+
+###############################################
+# RASPBERRY PI /

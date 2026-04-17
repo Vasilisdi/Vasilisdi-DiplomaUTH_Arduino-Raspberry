@@ -2,10 +2,17 @@ serial:
   # This applies in the case of Linux OS
   port_linux: "/dev/ttyACM0"
   # This applies in the case of Windows OS
-  port_windows: "COM3"
+  port_windows: "COM5"
   baud_rate: 115200
+
+mqtt:
+  broker: "tcp://127.0.0.1:1883"
+  client_id: "edge_collector"
+  topic: "vibration/sensor1"
+
 time_window: 60
-#user defined
+
+# user defined
 rpm: 300
 bpfi: 3.4
 bpfo: 2
@@ -13,4 +20,3 @@ ftf: 10
 bsf: 5
 threshold: 5
 Len: 5000
-

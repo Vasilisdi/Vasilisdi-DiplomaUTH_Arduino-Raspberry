@@ -1,4 +1,28 @@
-# Repository Introduction
+#  Project Introduction
+
+This repository contains the software implementation of my diploma thesis on **continuous machine vibration monitoring** and **FFT‑based fault detection**.  
+The system collects high‑frequency vibration data from an STM32 microcontroller, processes it in real time, and streams both waveform and frequency‑domain features through **MQTT → Telegraf → InfluxDB**, enabling live dashboards and predictive maintenance analytics.
+
+The full theoretical background, methodology, and detailed explanation of the vibration analysis pipeline are available in my technical report:
+
+👉 **Full Theory & Documentation:**  
+https://github.com/Vasilisdi/Technical-Report
+
+###  Thesis Background (Summary)
+
+This thesis investigates the design and implementation of a year‑round vibration monitoring system capable of detecting mechanical faults in rotating machinery.  
+Using **Fast Fourier Transform (FFT)** techniques, the system identifies characteristic fault signatures and supports **predictive maintenance** strategies with low‑cost hardware such as the ADXL335 accelerometer.
+
+### 🎯 Key Outcomes
+
+- ✅ Real‑time fault detection in rotating machinery  
+- ✅ Data‑driven preventive maintenance strategies  
+- ✅ Cost‑effective FFT‑based analysis pipeline  
+- ✅ End‑to‑end IIoT architecture using STM32, MQTT, Telegraf, and InfluxDB  
+
+
+
+# About Repositories
 In the repository, there is two different approaches for the same problem, separated in two different branches - main and version2. In the main branch there is the "results" folder containing the results of the testing phase and the deployment phase on a rotating fan. While the "dataset" folder is used for validation and visual checks.
 
 This repository contains 2 different running sections. The first section is this of testing. There is the files test_data_from_datasets1.py and test_data_from_datasets2.py.  The frequenct spectra of the defective machine waveforms are to be ploted on some figure for visual analysis and illustration. (following detailed instructions on this).

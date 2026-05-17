@@ -339,7 +339,9 @@ for (size_t i = 0; i < 2000; i++)
 for (size_t i = 0; i < 35000; i++)
 ````
 
-## Data Structure (version2 branch)
+
+
+# Data Structure (version2 branch)
 
 The `version2` branch follows a modular C++ architecture designed for
 high‑frequency vibration acquisition, MQTT telemetry, and InfluxDB ingestion.
@@ -365,7 +367,12 @@ sourceCode/
 │
 ├── config.yaml             # Acquisition, FFT, MQTT, and InfluxDB settings
 ├── CMakeLists.txt          # Build configuration
-├── main.cpp                # End-to-end executable (STM32 → Serial → MQTT → InfluxDB)
+└── main.cpp                # End-to-end executable (STM32 → Serial → MQTT → InfluxDB)
+
+
+## What grafana dashboards look like
+<img width="1493" height="708" alt="spectra dashboard" src="https://github.com/user-attachments/assets/403fa18b-963a-4830-bb8d-f5f56d3749dd" />
+<img width="1495" height="728" alt="waveform dashboard" src="https://github.com/user-attachments/assets/370b277a-c3c4-43ec-afb4-6146f4b50787" />
 
 
 

@@ -348,6 +348,7 @@ high‑frequency vibration acquisition, MQTT telemetry, and InfluxDB ingestion.
 
 The directory structure is:
 
+```md
 sourceCode/
 │
 ├── conversion/
@@ -368,6 +369,8 @@ sourceCode/
 ├── config.yaml             # Acquisition, FFT, MQTT, and InfluxDB settings
 ├── CMakeLists.txt          # Build configuration
 └── main.cpp                # End-to-end executable (STM32 → Serial → MQTT → InfluxDB)
+```
+
 
 
 ## What grafana dashboards look like

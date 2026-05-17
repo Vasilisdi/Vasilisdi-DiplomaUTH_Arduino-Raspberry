@@ -1,5 +1,5 @@
 # Repository Introduction
-In the repository there is the "results" folder containing the results of the testing phase and the deployment phase on a rotating fan. While the "dataset" folder is used for validation and visual checks.
+In the repository, there is two different approaches for the same problem, separated in two different branches - main and version2. In the main branch there is the "results" folder containing the results of the testing phase and the deployment phase on a rotating fan. While the "dataset" folder is used for validation and visual checks.
 
 This repository contains 2 different running sections. The first section is this of testing. There is the files test_data_from_datasets1.py and test_data_from_datasets2.py.  The frequenct spectra of the defective machine waveforms are to be ploted on some figure for visual analysis and illustration. (following detailed instructions on this).
 
@@ -8,6 +8,8 @@ In addition to this, there is the sourceCode folder, containing the main.py file
 - test_data_from_datasets1.py for test datasets model validation.
 - test_data_from_datasets2.py for test datasets model validation.
 - main.py for real-life machine applications.
+
+While in the "version2" branch encompasses a more industial-based appoach that will be elaborated in a following section.
 
 
 # Testing Phase Running
@@ -188,3 +190,274 @@ poetry run python sourceCode/main.py
 ```
 
 
+
+# Version 2 — STM32 + C++ + MQTT + InfluxDB + Grafana (Real-Time Streaming)
+
+The repository includes a second, fully independent architecture located in the `version2` branch as well.
+
+This implementation was designed to overcome the limitations of the original
+Arduino + Raspberry Pi pipeline and enable significantly higher acquisition rates,
+continuous waveform streaming, and industrial-grade telemetry visualization.
+
+The `version2` branch introduces a complete real-time vibration monitoring pipeline
+using:
+
+- STM32 high-speed acquisition
+- C++ signal processing
+- MQTT telemetry streaming
+- InfluxDB time-series storage
+- Grafana dashboards
+
+This architecture is intended for high-frequency rotating machinery monitoring,
+FFT spectral analysis, and predictive maintenance experimentation.
+
+---
+
+# Overview of the version2 architecture
+
+Accelerometer  
+      ↓  
+STM32 microcontroller (high-speed ADC sampling)  
+      ↓ Serial communication (USB)  
+PC Application (C++ waveform collector and FFT processor)  
+      ↓  
+MQTT Broker (telemetry streaming)  
+      ↓  
+Telegraf (MQTT → InfluxDB ingestion)  
+      ↓  
+InfluxDB (time-series storage)  
+      ↓  
+Grafana (real-time dashboards)
+
+---
+
+# Why STM32 instead of Arduino
+
+The original Arduino-based implementation was suitable for:
+- proof-of-concept testing
+- low-frequency monitoring
+- periodic acquisition
+- lightweight deployments
+
+However, it became insufficient for:
+- high sampling frequencies
+- dense waveform acquisition
+- large FFT windows
+- continuous real-time streaming
+
+The STM32 architecture significantly improves:
+
+- ADC acquisition speed
+- serial throughput
+- sampling stability
+- waveform density
+- FFT resolution
+- real-time responsiveness
+
+The system now reaches approximately a range of 7500 Hz of sampling frequency [0-7500 Hz] and this is firmly related to the capacity of stm32, which produces extremely dense vibration waveforms and significantly more accurate frequency-domain analysis.
+
+However, it became insufficient for:
+- improved bearing fault visibility
+- clearer harmonic analysis
+- higher FFT frequency resolution
+- better transient detection
+
+## High-Frequency Acquisition Performance (version2 branch)
+
+The STM32-based architecture achieves significantly higher sampling throughput
+compared to the original Raspberry Pi implementation.
+
+Typical performance:
+
+- ~450,000 samples per minute, with 7500 Hz range
+
+In certain experimental configurations, the system approaches:
+
+- ~900,000 samples per minute
+
+The exact throughput depends on:
+
+- FFT window size  
+- acquisition duration  
+- serial transfer stability  
+- MQTT throughput  
+- InfluxDB ingestion rate  
+- waveform packet size  
+- Grafana refresh intervals  
+
+This represents a major improvement over the original Raspberry Pi design and
+demonstrates the substantially higher throughput capabilities of the STM32-based
+real-time acquisition pipeline.
+
+### Benefits of Higher Sampling Frequency
+
+The increased sampling rate enables:
+
+- denser waveform reconstruction  
+- improved transient visibility  
+- enhanced harmonic analysis  
+- more detailed spectral decomposition  
+- higher FFT resolution  
+- improved bearing fault visibility  
+
+These improvements are critical for predictive maintenance and rotating machinery
+diagnostics.
+
+---
+
+## Current Limitation — Telemetry Throughput Bottleneck
+
+The primary bottleneck of the current architecture is **no longer the STM32
+acquisition speed**.
+
+Instead, the limiting factor is the transmission of extremely large waveform
+datasets through the telemetry pipeline:
+
+
+
+### Present Behavior
+
+- waveform data are published **sample-by-sample**  
+- FFT spectra are also streamed **point-by-point**  
+- MQTT publishing is **synchronous**  
+- every measurement triggers an **InfluxDB write operation**  
+
+This results in:
+
+- very large MQTT traffic  
+- increased serialization overhead  
+- increased database write load  
+- slower end-to-end transmission time  
+
+For example, the current implementation intentionally limits transmission to:
+
+```cpp
+// Waveform streaming
+for (size_t i = 0; i < 2000; i++)
+
+// FFT spectrum streaming
+for (size_t i = 0; i < 35000; i++)
+````
+
+## Data Structure (version2 branch)
+
+The `version2` branch follows a modular C++ architecture designed for
+high‑frequency vibration acquisition, MQTT telemetry, and InfluxDB ingestion.
+
+The directory structure is:
+
+sourceCode/
+│
+├── conversion/
+│   ├── analysis.cpp        # FFT, waveform processing, spectral utilities
+│   └── analysis.hpp
+│
+├── mqtt/
+│   ├── mqtt.cpp            # MQTT publisher (sample-by-sample + FFT streaming)
+│   └── mqtt.hpp
+│
+├── influxdbsql/
+│   ├── waveform.txt        # Example InfluxDB line protocol for waveform samples
+│   └── spectrum.txt        # Example InfluxDB line protocol for FFT bins
+│
+├── telegraf/
+│   └── telegraf.conf.txt   # Telegraf MQTT → InfluxDB ingestion configuration
+│
+├── config.yaml             # Acquisition, FFT, MQTT, and InfluxDB settings
+├── CMakeLists.txt          # Build configuration
+├── main.cpp                # End-to-end executable (STM32 → Serial → MQTT → InfluxDB)
+
+
+
+### Module Responsibilities
+
+**conversion/**
+- Implements waveform processing  
+- FFT computation  
+- spectral feature extraction  
+- timestamp reconstruction utilities  
+
+**mqtt/**
+- Publishes waveform samples to MQTT  
+- Publishes FFT bins  
+- Handles synchronous telemetry transmission  
+- Implements topic formatting and QoS settings  
+
+**influxdbsql/**
+- Contains example line-protocol templates  
+- Used for debugging Telegraf → InfluxDB ingestion  
+
+**telegraf/**
+- MQTT subscription rules  
+- InfluxDB output configuration  
+- Measurement naming and tag mapping  
+
+**main.cpp**
+- Serial acquisition from STM32  
+- Waveform packet decoding  
+- FFT execution  
+- MQTT publishing loop  
+- End-to-end telemetry pipeline  
+
+**config.yaml**
+- Sampling frequency  
+- FFT window size  
+- MQTT broker address  
+- InfluxDB bucket/organization  
+- Axis selection  
+- Acquisition duration
+
+## Running InfluxDB and Telegraf (Administrator PowerShell)
+
+These commands must be executed in an **Administrator PowerShell** because
+InfluxDB and Telegraf open network ports and require elevated permissions.
+
+```ps
+PS C:\Program Files\InfluxData\telegraf\telegraf-1.38.2> .\telegraf.exe --config "C:\Program Files\InfluxData\telegraf\telegraf.conf"
+
+PS C:\Program Files\InfluxData\influxdb2> .\influxd.exe
+```
+
+## Building and Running the C++ Telemetry Pipeline (x64 Native Tools Command Prompt)
+
+The following commands must be executed inside the:
+
+**Start Menu → Developer Command Prompt for VS 2022 → x64 Native Tools**
+
+This environment is required because it:
+
+- loads the MSVC compiler (`cl.exe`)
+- loads the MSVC linker
+- loads Windows SDK include/lib paths
+- loads vcpkg include/lib paths
+- ensures correct 64‑bit compilation and linking
+
+### Build the executable
+
+```cmd
+C:\Users\arian\Desktop\Vasilisdi-DiplomaUTH_Arduino-Raspberry\sourceCode>cl /EHsc /std:c++17 main.cpp mqtt\mqtt.cpp conversion\analysis.cpp /I C:\vcpkg\installed\x64-windows\include /link /LIBPATH:C:\vcpkg\installed\x64-windows\lib yaml-cpp.lib paho-mqttpp3.lib paho-mqtt3a.lib ws2_32.lib
+
+C:\Users\arian\Desktop\Vasilisdi-DiplomaUTH_Arduino-Raspberry\sourceCode>.\main.exe
+```
+
+
+
+Future work may contain a machine learning implementation.
+
+## Project Keywords
+
+- Arduino
+- Raspberry Pi
+- STM32
+- STM32CubeIDE
+- MQTT
+- Telegraf
+- InfluxDB
+- Supabase
+- Python
+- C++
+- Next.js
+- Vibration Analysis
+- FFT
+- Predictive Maintenance
+- Industrial IoT

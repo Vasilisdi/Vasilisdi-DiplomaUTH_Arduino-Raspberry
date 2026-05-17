@@ -98,7 +98,8 @@ int main() {
         std::cout << "Last frequency bin value (max spectrum frequency): " << fftResult.frequencies[fftResult.frequencies.size()-1] << std::endl;
 
         double dt_ns = 1'000'000'000ULL / sampleRate;
-        uint64_t start_ns = std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+        auto start_time = std::chrono::steady_clock::now().time_since_epoch();
+        uint64_t start_ns = std::chrono::duration_cast<std::chrono::nanoseconds>(start_time).count();
 
         MqttClient mqttClient(mqttCfg.broker,
                             mqttCfg.client_id,

@@ -97,8 +97,6 @@ int main() {
         std::cout << "Size of frequencies vector bins: " << fftResult.frequencies.size() << std::endl;
         std::cout << "Last frequency bin value (max spectrum frequency): " << fftResult.frequencies[fftResult.frequencies.size()-1] << std::endl;
 
-        double dt_ns = 1'000'000'000ULL / sampleRate;
-        uint64_t start_ns = std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 
         MqttClient mqttClient(mqttCfg.broker,
                             mqttCfg.client_id,
@@ -106,11 +104,13 @@ int main() {
 
         mqttClient.connect();
 
-        mqttClient.publishWaveform(converted.xs, converted.ys, converted.zs, start_ns, dt_ns);
+        mqttClient.publishChunks(converted.xs, converted.ys, converted.zs);
 
-        mqttClient.publishFFT(fftResult.frequencies, fftResult.magnitudeTotal, fftResult.magnitudeX,
-                            fftResult.magnitudeY,
-                            fftResult.magnitudeZ);
+        mqttClient.publishFFT(fftResult.frequencies,
+                      fftResult.magnitudeTotal,
+                      fftResult.magnitudeX,
+                      fftResult.magnitudeY,
+                      fftResult.magnitudeZ);
 
         mqttClient.disconnect();
 

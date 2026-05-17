@@ -1,0 +1,33 @@
+from(bucket: "vibration_waveform")
+  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+  |> filter(fn: (r) => r["_measurement"] == "waveform")
+  |> filter(fn: (r) => r["_field"] == "v_z" or r["_field"] == "v_y" or r["_field"] == "v_x" or r["_field"] == "t")
+  |> filter(fn: (r) => r["host"] == "MSI")
+  |> filter(fn: (r) => r["topic"] == "vibration/sensor1/waveform/may_17")
+  |> pivot(
+      rowKey:["_time"],
+      columnKey: ["_field"],
+      valueColumn: "_value"
+  )
+  |> map(fn: (r) => ({
+      r with _time: time(v: int(v: r.t))   // <-- ΕΔΩ ΓΙΝΕΤΑΙ Η ΜΕΤΑΤΡΟΠΗ
+  }))
+  |> keep(columns: ["_time","v_x", "v_y", "v_z"])
+
+
+
+
+Η καλύτερα αυτό : 
+
+from(bucket: "vibration_waveform")
+  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+  |> filter(fn: (r) => r["_measurement"] == "waveform")
+  |> filter(fn: (r) => r["_field"] == "v_z" or r["_field"] == "v_y" or r["_field"] == "v_x" or r["_field"] == "t")
+  |> filter(fn: (r) => r["host"] == "MSI")
+  |> filter(fn: (r) => r["topic"] == "vibration/sensor1/waveform/may_17")
+  |> pivot(
+      rowKey:["t"],          // <-- ΕΔΩ! rowKey = t (unique per sample)
+      columnKey: ["_field"],
+      valueColumn: "_value"
+  )
+  |> keep(columns: ["t","v_x","v_y","v_z"])

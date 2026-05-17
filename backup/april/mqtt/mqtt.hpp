@@ -12,11 +12,9 @@ public:
     void connect();
     void disconnect();
 
-    void publishWaveform(const std::vector<double>& xs,
-                    const std::vector<double>& ys,
-                    const std::vector<double>& zs,
-                    uint64_t start_ns,
-                    double dt_ns);
+    void publishChunks(const std::vector<double>& xs,
+                       const std::vector<double>& ys,
+                       const std::vector<double>& zs);
 
     void publishFFT(const std::vector<double>& frequencies,
                     const std::vector<double>& magTotal,
@@ -28,10 +26,8 @@ private:
     mqtt::async_client client_;
     std::string topic_;
 
-                        
-    std::string createWaveJson(uint64_t ts, double x, double y, double z);                            
-    
-
-    std::string MqttClient::createFFTJson(double frequencies, double magTotal, 
-                           double magX,  double magY, double magZ);
+    std::string createJson(size_t start, size_t end,
+                           const std::vector<double>& xs,
+                           const std::vector<double>& ys,
+                           const std::vector<double>& zs);
 };

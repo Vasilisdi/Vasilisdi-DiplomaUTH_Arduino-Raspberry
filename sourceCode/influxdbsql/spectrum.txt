@@ -1,0 +1,11 @@
+from(bucket: "vibration_frequency")
+  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+  |> filter(fn: (r) => r["_measurement"] == "frequencies")
+  |> filter(fn: (r) => r["host"] == "MSI")
+  |> filter(fn: (r) => r["topic"] == "vibration/sensor1/frequencies/may_17")
+  |> pivot(
+      rowKey:["_time"],
+      columnKey: ["_field"],
+      valueColumn: "_value"
+  )
+  |> keep(columns: ["frequency", "FFT_x", "FFT_y" , "FFT_z"])

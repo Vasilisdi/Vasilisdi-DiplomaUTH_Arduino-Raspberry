@@ -117,6 +117,8 @@ void MqttClient::publishFFT(const std::vector<double>& frequencies,
         std::this_thread::sleep_for(std::chrono::milliseconds(1));
     }
 
+    std::cout << "max frequency: " << frequencies[frequencies.size()-1] << " \n";  
+
     std::cout << "Published waveform: " << frequencies.size() << " samples per axis\n";  
 
 

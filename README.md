@@ -215,7 +215,7 @@ poetry run python sourceCode/main.py
 
 
 
-# Version 2 — STM32 + C++ + MQTT + InfluxDB + Grafana (Real-Time Streaming)
+# Version 2 — STM32 + C++ + MQTT + InfluxDB + Grafana (Real-Time Streaming) - Amendment of the original project
 
 The repository includes a second, fully independent architecture located in the `version2` branch as well.
 
@@ -278,13 +278,94 @@ The STM32 architecture significantly improves:
 - FFT resolution
 - real-time responsiveness
 
-The system now reaches approximately a range of 7500 Hz of sampling frequency [0-7500 Hz] and this is firmly related to the capacity of stm32, which produces extremely dense vibration waveforms and significantly more accurate frequency-domain analysis.
+The system now reaches approximately a range of 7500 Hz of sampling frequency [0-7500 Hz] and this is firmly related to the capacity of stm32, which produces extremely dense vibration waveforms and significantly more accurate frequency-domain analysis. While Arduino may only reach frequency spectra up to 300 Hz. 
 
 However, it became insufficient for:
 - improved bearing fault visibility
 - clearer harmonic analysis
 - higher FFT frequency resolution
 - better transient detection
+
+
+## STM32 Firmware Architecture
+
+The STM32 firmware was developed using:
+
+- STM32CubeMX for peripheral configuration
+- STM32CubeIDE for firmware development and debugging
+
+The system uses:
+
+- ADC multi-channel continuous conversion
+- DMA-based memory transfers
+- USB CDC serial communication
+- binary packet streaming
+
+ADC acquisition is initialized through DMA:
+
+```c
+HAL_ADC_Start_DMA(&hadc1, (uint32_t*)adc_buffer, ADC_BUF_LEN);
+```
+
+DMA continuously updates the ADC buffer:
+
+```text
+adc_buffer[0] -> X axis
+adc_buffer[1] -> Y axis
+adc_buffer[2] -> Z axis
+```
+
+The firmware creates atomic snapshots of the ADC values:
+
+```c
+__disable_irq();
+x = adc_buffer[0];
+y = adc_buffer[1];
+z = adc_buffer[2];
+__enable_irq();
+```
+
+Each ADC value is transmitted as a 16-bit binary value:
+
+```c
+packet[i++] = x >> 8;
+packet[i++] = x & 0xFF;
+```
+
+Each waveform sample contains:
+
+```text
+X axis -> 2 bytes
+Y axis -> 2 bytes
+Z axis -> 2 bytes
+```
+
+Resulting in:
+
+```text
+6 bytes per sample
+```
+
+Multiple samples are aggregated into larger USB packets:
+
+```c
+#define SAMPLES_PER_PACKET 10
+#define PACKET_SIZE (SAMPLES_PER_PACKET * 6)
+```
+
+This produces:
+
+```text
+10 samples × 6 bytes = 60-byte binary packets
+```
+
+On the PC side, the C++ application reconstructs the original ADC values:
+
+```cpp
+uint16_t x = (buffer[i*6] << 8) | buffer[i*6+1];
+uint16_t y = (buffer[i*6+2] << 8) | buffer[i*6+3];
+uint16_t z = (buffer[i*6+4] << 8) | buffer[i*6+5];
+```
 
 ## High-Frequency Acquisition Performance (version2 branch)
 
@@ -473,7 +554,6 @@ C:\Users\arian\Desktop\Vasilisdi-DiplomaUTH_Arduino-Raspberry\sourceCode>cl /EHs
 
 C:\Users\arian\Desktop\Vasilisdi-DiplomaUTH_Arduino-Raspberry\sourceCode>.\main.exe
 ```
-
 
 
 Future work may contain a machine learning implementation.

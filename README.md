@@ -1,3 +1,61 @@
+# Vasilisdi-DiplomaUTH
+
+## About This Project
+
+This repository contains the full software implementation of my UTH MSc diploma thesis on **continuous machine vibration monitoring** and **FFT‑based fault detection**.
+
+It includes two complete architectures:
+
+### 1. Python + Arduino/Raspberry Pipeline  
+A full end‑to‑end vibration analysis workflow using Python, MQTT, Telegraf, and InfluxDB.  
+It supports:
+- High‑frequency vibration acquisition  
+- Real‑time FFT feature extraction  
+- Dataset validation and testing scripts  
+- Supabase integration for remote data posting  
+
+This implementation is used for concept validation, dataset testing, and periodic monitoring.
+
+### 2. STM32 + C++ + FreeRTOS + DMA Pipeline (version2 branch)  
+A high‑speed industrial architecture designed for **continuous waveform streaming** and **dense spectral analysis**.  
+It features:
+- Custom ADC + DMA double‑buffer acquisition  
+- FreeRTOS synchronization  
+- USB CDC high‑throughput transmission  
+- C++ FFT processing  
+- MQTT → Telegraf → InfluxDB → Grafana telemetry chain  
+
+This architecture achieves significantly higher sampling rates and stable real‑time acquisition suitable for rotating machinery diagnostics.
+
+---
+
+## Tags
+
+IIoT  
+Predictive Maintenance  
+Vibration Analysis  
+FFT  
+Machine Fault Detection  
+Embedded Systems  
+STM32  
+FreeRTOS  
+DMA  
+ADC  
+C++  
+Python  
+MQTT  
+Telegraf  
+InfluxDB  
+Grafana  
+Supabase  
+Signal Processing  
+Time‑Series Data  
+Industrial Automation  
+Real‑Time Streaming  
+Raspberry Pi  
+Arduino  
+
+
 #  Project Introduction
 
 This repository contains the software implementation of my diploma thesis on **continuous machine vibration monitoring** and **FFT‑based fault detection**.  

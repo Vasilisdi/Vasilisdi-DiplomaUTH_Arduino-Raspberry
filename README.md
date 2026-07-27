@@ -29,32 +29,6 @@ This architecture achieves significantly higher sampling rates and stable real�
 
 ---
 
-## Tags
-
-IIoT  
-Predictive Maintenance  
-Vibration Analysis  
-FFT  
-Machine Fault Detection  
-Embedded Systems  
-STM32  
-FreeRTOS  
-DMA  
-ADC  
-C++  
-Python  
-MQTT  
-Telegraf  
-InfluxDB  
-Grafana  
-Supabase  
-Signal Processing  
-Time‑Series Data  
-Industrial Automation  
-Real‑Time Streaming  
-Raspberry Pi  
-Arduino  
-
 
 #  Project Introduction
 
@@ -1141,7 +1115,9 @@ C:\Users\arian\Desktop\Vasilisdi-DiplomaUTH_Arduino-Raspberry\sourceCode>.\main.
 
 Future work may contain a machine learning implementation.
 
-## Project Keywords
+## Tags
+
+Project Keywords:
 
 - Arduino
 - Raspberry Pi
@@ -1158,3 +1134,15 @@ Future work may contain a machine learning implementation.
 - FFT
 - Predictive Maintenance
 - Industrial IoT
+- Vibration Analysis  
+- FFT  
+- Machine Fault Detection  
+- Embedded Systems  
+- FreeRTOS  
+- DMA  
+- ADC  
+- Grafana  
+- Signal Processing  
+- Time‑Series Data  
+- Industrial Automation  
+- Real‑Time Streaming  

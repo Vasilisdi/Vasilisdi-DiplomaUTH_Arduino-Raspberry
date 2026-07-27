@@ -287,7 +287,7 @@ Grafana (real-time dashboards)
 
 ---
 
-# Why STM32 instead of Arduino
+# Why STM32 [4,1kHz] instead of Arduino [300Hz]
 
 The original Arduino-based implementation was suitable for:
 - proof-of-concept testing
@@ -310,7 +310,7 @@ The STM32 architecture significantly improves:
 - FFT resolution
 - real-time responsiveness
 
-The system now reaches approximately a range of 7500 Hz of sampling frequency [0-7500 Hz] and this is firmly related to the capacity of stm32, which produces extremely dense vibration waveforms and significantly more accurate frequency-domain analysis. While Arduino may only reach frequency spectra up to 300 Hz. 
+The system now reaches approximately a range of 4100 Hz of sampling frequency [0-4100 Hz] and this is firmly related to the capacity of stm32, which produces extremely dense vibration waveforms and significantly more accurate frequency-domain analysis. While Arduino may only reach frequency spectra up to 300 Hz. 
 
 However, it became insufficient for:
 - improved bearing fault visibility

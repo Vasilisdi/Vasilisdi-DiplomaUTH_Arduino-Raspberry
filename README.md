@@ -433,6 +433,29 @@ This provides:
 - Precise control over timing
 - Deterministic real-time behavior
 
+```md
+STM32/
+│
+├── Core/
+│   ├── Inc/
+│   │   ├── adc.h
+│   │   ├── exti.h
+│   │   ├── uart.h
+│   │   └── main.h
+│   │
+│   └── Src/
+│       ├── main.c             # Application entry point
+│       ├── adc.c              # ADC + DMA driver
+│       ├── exti.c             # External interrupt driver
+│       ├── uart.c             # UART communication
+│       └── freertos.c         # RTOS tasks
+│
+├── Drivers/                   # Vendor libraries
+├── Middlewares/               # FreeRTOS & USB
+├── USB_Device/                # USB CDC stack
+└── STM32F407.ioc
+```
+
 ---
 
 # Custom ADC Driver
